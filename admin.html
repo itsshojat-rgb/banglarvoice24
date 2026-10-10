@@ -3,75 +3,40 @@
 <html lang="bn">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>BanglarVoice24 | Admin Panel</title>
 <style>
+:root{--red:#c8102e;--dark:#202938;--muted:#687386;--line:#d9dee8;--bg:#f3f5f9}
 *{box-sizing:border-box}
-body{
-  margin:0;background:#f3f5f9;color:#202938;
-  font-family:Arial,"Noto Sans Bengali",sans-serif
-}
-.header{
-  background:linear-gradient(135deg,#a90016,#e21d32);
-  color:#fff;text-align:center;padding:25px 15px;
-  box-shadow:0 4px 15px #8e001b30
-}
-.logo{
-  display:inline-block;background:#fff;color:#c20b22;
-  font-weight:900;font-size:25px;padding:10px 16px;
-  border-radius:8px
-}
-.header h1{font-size:23px;margin:14px 0 5px}
-.header p{margin:0;font-size:14px}
-.container{max-width:760px;margin:22px auto;padding:0 13px}
-.card{
-  background:#fff;padding:20px;border-radius:15px;
-  box-shadow:0 5px 22px #18243a0c;margin-bottom:18px
-}
-.card h2{font-size:20px;margin:0 0 18px}
-.section-title{
-  border-left:4px solid #d30c27;padding-left:10px
-}
-label{display:block;font-weight:700;font-size:14px;margin:15px 0 7px}
-input,select,textarea{
-  display:block;width:100%;padding:13px;
-  border:1px solid #d9dee8;border-radius:9px;
-  font-size:16px;background:#fff;color:#222;
-  outline:none
-}
-input:focus,select:focus,textarea:focus{
-  border-color:#c90c25;box-shadow:0 0 0 3px #c90c2512
-}
-textarea{min-height:160px;resize:vertical;line-height:1.7}
+body{margin:0;background:var(--bg);color:var(--dark);font-family:Arial,"Noto Sans Bengali",sans-serif}
+.header{background:linear-gradient(135deg,#900018,#e21d32);color:#fff;text-align:center;padding:24px 14px}
+.logo{display:inline-block;background:#fff;color:#c20b22;font-weight:900;font-size:23px;padding:10px 15px;border-radius:8px}
+.header h1{font-size:22px;margin:13px 0 5px}
+.header p{margin:0;font-size:13px}
+.container{max-width:900px;margin:22px auto;padding:0 13px}
+.card{background:#fff;padding:20px;border-radius:15px;box-shadow:0 5px 22px #18243a0c;margin-bottom:18px}
+.card h2{font-size:19px;margin:0 0 17px;border-left:4px solid var(--red);padding-left:10px}
+label{display:block;font-weight:700;font-size:14px;margin:14px 0 7px}
+input,select,textarea{display:block;width:100%;padding:12px;border:1px solid var(--line);border-radius:9px;font-size:15px;background:#fff;color:#222}
+textarea{min-height:180px;resize:vertical;line-height:1.8}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.upload{
-  background:#fff8f8;border:2px dashed #df9aa4;
-  padding:16px;border-radius:12px
-}
+.upload{background:#fff8f8;border:2px dashed #df9aa4;padding:15px;border-radius:12px}
 .upload input{border:0;padding:8px 0;background:transparent}
-#preview{
-  display:none;width:100%;max-height:280px;
-  object-fit:contain;border-radius:10px;margin-top:12px;
-  background:#f1f1f1
-}
-.btn{
-  width:100%;padding:15px;border:0;border-radius:10px;
-  font-size:17px;font-weight:700;cursor:pointer
-}
-.publish{
-  margin-top:20px;color:#fff;
-  background:linear-gradient(135deg,#b9001b,#e31b35);
-  box-shadow:0 5px 13px #c20b222c
-}
-.reset{margin-top:10px;background:#edf0f5;color:#374151}
-.note{font-size:12px;color:#687386;line-height:1.7}
-#status{margin-top:15px;line-height:1.7;overflow-wrap:anywhere}
+#preview{display:none;width:100%;max-height:300px;object-fit:contain;border-radius:10px;margin-top:12px;background:#f1f1f1}
+.btn{padding:14px;border:0;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer}
+.primary{color:#fff;background:linear-gradient(135deg,#b9001b,#e31b35)}
+.secondary{background:#edf0f5;color:#374151}
+.actions{display:grid;grid-template-columns:1fr 1fr 1.3fr;gap:10px;margin-top:18px}
+.note{font-size:12px;color:var(--muted);line-height:1.7}
+#status{margin-top:14px;line-height:1.7;overflow-wrap:anywhere}
+.previewbox{display:none;margin-top:18px;padding:16px;border:1px solid var(--line);border-radius:12px}
+.previewbox h3{font-size:23px}
+.previewbox img{max-width:100%;max-height:350px;object-fit:contain}
+.articlebody{white-space:pre-wrap;line-height:1.9}
 .footer{text-align:center;color:#788194;font-size:12px;padding:20px}
-@media(max-width:480px){
-  .grid{grid-template-columns:1fr}
-  .card{padding:16px}
-  .header h1{font-size:21px}
-}
+.warning{background:#fff7e6;border:1px solid #f1d18a;padding:12px;border-radius:9px;font-size:13px;line-height:1.7}
+.saved{border:1px solid var(--line);padding:12px;border-radius:9px;margin-top:10px}
+@media(max-width:560px){.grid,.actions{grid-template-columns:1fr}.card{padding:15px}.header h1{font-size:20px}}
 </style>
 </head>
 <body>
@@ -79,58 +44,468 @@ textarea{min-height:160px;resize:vertical;line-height:1.7}
 <header class="header">
   <div class="logo">BanglarVoice24</div>
   <h1>সংবাদ প্রকাশ অ্যাডমিন প্যানেল</h1>
-  <p>আপনার সংবাদ লিখুন, ছবি নির্বাচন করুন ও প্রকাশের জন্য প্রস্তুত করুন</p>
+  <p>সংবাদ লিখুন • ছবি দিন • খসড়া রাখুন • GitHub-এ প্রকাশ করুন</p>
 </header>
 
 <main class="container">
-  <section class="card">
-    <h2 class="section-title">📰 নতুন সংবাদ তৈরি করুন</h2>
 
-    <form id="newsForm">
-      <label for="title">সংবাদের শিরোনাম *</label>
-      <input id="title" required maxlength="250"
-        placeholder="এখানে সংবাদের শিরোনাম লিখুন">
+<section class="card">
+<h2>🔐 GitHub প্রকাশ সংযোগ</h2>
+<div class="warning">
+<b>নিরাপত্তা:</b> GitHub Token HTML কোডে লিখবেন না।
+নিচে Token দিলে এটি শুধু চলতি পেজে ব্যবহার হবে।
+GitHub Pages নিজে সার্ভার নয়। এই প্যানেল GitHub API ব্যবহার করে ফাইল প্রকাশ করে।
+</div>
 
-      <label for="category">সংবাদ ক্যাটাগরি *</label>
-      <select id="category" required>
-        <option value="">ক্যাটাগরি নির্বাচন করুন</option>
-        <option>জাতীয়</option>
-        <option>রাজনীতি</option>
-        <option>সারাদেশ</option>
-        <option>আন্তর্জাতিক</option>
-        <option>অর্থনীতি</option>
-        <option>শিক্ষা</option>
-        <option>স্বাস্থ্য</option>
-        <option>অপরাধ</option>
-        <option>খেলাধুলা</option>
-        <option>বিনোদন</option>
-        <option>ধর্ম</option>
-        <option>প্রযুক্তি</option>
-        <option>চাকরি</option>
-        <option>অন্যান্য</option>
-      </select>
+<div class="grid">
+<div>
+<label for="owner">GitHub ইউজারনেম</label>
+<input id="owner" value="itsshojat-rgb" autocomplete="off">
+</div>
+<div>
+<label for="repo">Repository নাম</label>
+<input id="repo" value="banglarvoice24" autocomplete="off">
+</div>
+</div>
 
-      <label for="content">সংবাদের বিস্তারিত বিবরণ *</label>
-      <textarea id="content" required
-        placeholder="সম্পূর্ণ সংবাদ এখানে লিখুন..."></textarea>
+<div class="grid">
+<div>
+<label for="branch">Branch</label>
+<input id="branch" value="main">
+</div>
+<div>
+<label for="token">Fine-grained GitHub Token</label>
+<input id="token" type="password" autocomplete="off" placeholder="github_pat_…">
+<p class="note">শুধু নির্দিষ্ট Repository নির্বাচন করুন। Contents: Read and write অনুমতি দিন।</p>
+</div>
+</div>
 
-      <h2 class="section-title" style="margin-top:25px">📍 সংবাদ এলাকার তথ্য</h2>
+<p class="note">GitHub → Settings → Developer settings → Personal access tokens থেকে Token তৈরি করুন। মেয়াদ সীমিত রাখুন।</p>
+</section>
 
-      <label for="division">বিভাগের নাম *</label>
-      <select id="division" required>
-        <option value="">বিভাগ নির্বাচন করুন</option>
-        <option>ঢাকা</option>
-        <option>চট্টগ্রাম</option>
-        <option>রাজশাহী</option>
-        <option>খুলনা</option>
-        <option>বরিশাল</option>
-        <option>সিলেট</option>
-        <option>রংপুর</option>
-        <option>ময়মনসিংহ</option>
-      </select>
+<section class="card">
+<h2>📰 নতুন সংবাদ তৈরি করুন</h2>
 
-      <div class="grid">
-        <div>
-          <label for="district">জেলার নাম *</label>
-          <input id="district" required placeholder="যেমন: রাজবাড়ী">
-        </div>
+<form id="newsForm">
+
+<label for="title">সংবাদের শিরোনাম *</label>
+<input id="title" required maxlength="250" placeholder="সংবাদের শিরোনাম লিখুন">
+
+<div class="grid">
+<div>
+<label for="category">ক্যাটাগরি *</label>
+<select id="category" required>
+<option value="">ক্যাটাগরি নির্বাচন করুন</option>
+<option>জাতীয়</option>
+<option>রাজনীতি</option>
+<option>সারাদেশ</option>
+<option>আন্তর্জাতিক</option>
+<option>অর্থনীতি</option>
+<option>শিক্ষা</option>
+<option>স্বাস্থ্য</option>
+<option>অপরাধ</option>
+<option>খেলাধুলা</option>
+<option>বিনোদন</option>
+<option>ধর্ম</option>
+<option>প্রযুক্তি</option>
+<option>চাকরি</option>
+<option>কৃষি</option>
+<option>স্থানীয় সংবাদ</option>
+<option>অন্যান্য</option>
+</select>
+</div>
+<div>
+<label for="date">প্রকাশের তারিখ *</label>
+<input id="date" type="date" required>
+</div>
+</div>
+
+<label for="summary">সংক্ষিপ্ত বিবরণ</label>
+<textarea id="summary" style="min-height:85px" placeholder="সংবাদের সারাংশ (ঐচ্ছিক)"></textarea>
+
+<label for="content">সংবাদের বিস্তারিত বিবরণ *</label>
+<textarea id="content" required placeholder="সম্পূর্ণ সংবাদ লিখুন..."></textarea>
+
+<h2 style="margin-top:25px">📍 সংবাদ এলাকার তথ্য</h2>
+
+<label for="division">বিভাগ *</label>
+<select id="division" required>
+<option value="">বিভাগ নির্বাচন করুন</option>
+<option>ঢাকা</option>
+<option>চট্টগ্রাম</option>
+<option>রাজশাহী</option>
+<option>খুলনা</option>
+<option>বরিশাল</option>
+<option>সিলেট</option>
+<option>রংপুর</option>
+<option>ময়মনসিংহ</option>
+</select>
+
+<div class="grid">
+<div>
+<label for="district">জেলা *</label>
+<input id="district" required placeholder="যেমন: রাজবাড়ী">
+</div>
+<div>
+<label for="upazila">উপজেলা</label>
+<input id="upazila" placeholder="যেমন: গোয়ালন্দ">
+</div>
+</div>
+
+<label for="reporter">জেলা/উপজেলা প্রতিনিধির নাম *</label>
+<input id="reporter" required placeholder="প্রতিনিধির পূর্ণ নাম">
+
+<h2 style="margin-top:25px">📸 সংবাদ ছবি</h2>
+
+<div class="upload">
+<label for="photo" style="margin-top:0">মোবাইল গ্যালারি থেকে ছবি নির্বাচন করুন</label>
+<input id="photo" type="file" accept="image/jpeg,image/png,image/webp">
+<p class="note">JPG, PNG বা WebP; সর্বোচ্চ 5 MB।</p>
+<img id="preview" alt="নির্বাচিত ছবির প্রিভিউ">
+</div>
+
+<div class="actions">
+<button class="btn secondary" type="button" id="previewBtn">👁 প্রিভিউ</button>
+<button class="btn secondary" type="button" id="saveBtn">💾 খসড়া সংরক্ষণ</button>
+<button class="btn primary" type="submit" id="publishBtn">📤 GitHub-এ পাবলিশ</button>
+</div>
+
+<button class="btn secondary" type="reset" style="width:100%;margin-top:10px">ফর্ম পরিষ্কার করুন</button>
+
+<div id="status" role="status" aria-live="polite"></div>
+
+<div id="articlePreview" class="previewbox">
+<h2>সংবাদ প্রিভিউ</h2>
+<div class="note" id="pvMeta"></div>
+<h3 id="pvTitle"></h3>
+<p id="pvSummary"></p>
+<img id="pvImage" alt="সংবাদের ছবি" style="display:none">
+<div class="articlebody" id="pvContent"></div>
+</div>
+
+</form>
+</section>
+
+<section class="card">
+<h2>🗂 এই ডিভাইসের খসড়া</h2>
+<p class="note">খসড়া শুধু এই ব্রাউজারে থাকবে; এটি অনলাইন ডেটাবেস নয়।</p>
+<div id="savedList" class="note">কোনো খসড়া নেই।</div>
+</section>
+
+<section class="card">
+<h2>⚠️ প্রকাশের পরের ধাপ</h2>
+<p class="note">
+এই প্যানেল GitHub Repository-তে
+news-data/তারিখ-শিরোনাম.json এবং ছবি থাকলে news-images/ ফোল্ডারে ফাইল তৈরি করবে।
+হোমপেজে সংবাদ দেখানোর জন্য JSON ফাইল পড়ে দেখানোর আলাদা কোড প্রয়োজন।
+</p>
+</section>
+
+</main>
+
+<footer class="footer">© BanglarVoice24 — Admin Panel</footer>
+
+<script>
+const $ = id => document.getElementById(id);
+let imageData = '';
+
+$('date').value = new Date().toLocaleDateString('en-CA');
+
+const form = $('newsForm');
+const statusBox = $('status');
+
+function collect(){
+  return {
+    title:$('title').value.trim(),
+    category:$('category').value,
+    date:$('date').value,
+    summary:$('summary').value.trim(),
+    content:$('content').value.trim(),
+    division:$('division').value,
+    district:$('district').value.trim(),
+    upazila:$('upazila').value.trim(),
+    reporter:$('reporter').value.trim(),
+    image:imageData
+  };
+}
+
+$('photo').addEventListener('change',e=>{
+  const f=e.target.files[0];
+  imageData='';
+
+  if(!f){
+    $('preview').style.display='none';
+    return;
+  }
+
+  if(!/^image\/(jpeg|png|webp)$/.test(f.type)){
+    e.target.value='';
+    statusBox.textContent='JPG, PNG বা WebP ছবি নির্বাচন করুন।';
+    return;
+  }
+
+  if(f.size>5*1024*1024){
+    e.target.value='';
+    statusBox.textContent='ছবির আকার ৫ MB-এর বেশি।';
+    return;
+  }
+
+  const r=new FileReader();
+
+  r.onload=()=>{
+    imageData=r.result;
+    $('preview').src=imageData;
+    $('preview').style.display='block';
+    statusBox.textContent='ছবি নির্বাচন করা হয়েছে।';
+  };
+
+  r.onerror=()=>statusBox.textContent='ছবি পড়া যায়নি।';
+  r.readAsDataURL(f);
+});
+
+function slug(s){
+  return s.toLowerCase()
+    .normalize('NFKD')
+    .replace(/[\u0300-\u036f]/g,'')
+    .replace(/[^a-z0-9]+/g,'-')
+    .replace(/^-|-$/g,'')
+    .slice(0,65)||'news';
+}
+
+function renderPreview(){
+  if(!form.reportValidity()) return false;
+
+  const n=collect();
+
+  $('pvTitle').textContent=n.title;
+  $('pvMeta').textContent=
+    `${n.category} • ${n.division} বিভাগ • ${n.district} জেলা`+
+    `${n.upazila?' • '+n.upazila+' উপজেলা':''}`+
+    ` • প্রতিনিধি: ${n.reporter} • ${n.date}`;
+
+  $('pvSummary').textContent=n.summary;
+  $('pvContent').textContent=n.content;
+  $('pvImage').style.display=n.image?'block':'none';
+
+  if(n.image) $('pvImage').src=n.image;
+
+  $('articlePreview').style.display='block';
+  return true;
+}
+
+$('previewBtn').onclick=()=>{
+  if(renderPreview()){
+    $('articlePreview').scrollIntoView({behavior:'smooth'});
+  }
+};
+
+function drafts(){
+  try{
+    return JSON.parse(localStorage.getItem('bv24Drafts')||'[]');
+  }catch{
+    return [];
+  }
+}
+
+function refreshDrafts(){
+  const el=$('savedList');
+  const arr=drafts();
+
+  el.innerHTML='';
+
+  if(!arr.length){
+    el.textContent='কোনো খসড়া নেই।';
+    return;
+  }
+
+  arr.forEach((n,i)=>{
+    const box=document.createElement('div');
+    box.className='saved';
+
+    const t=document.createElement('b');
+    t.textContent=n.title;
+
+    const b=document.createElement('button');
+    b.className='btn secondary';
+    b.style.marginLeft='8px';
+    b.textContent='খুলুন';
+
+    b.onclick=()=>{
+      ['title','category','date','summary','content',
+       'division','district','upazila','reporter']
+      .forEach(k=>$(k).value=n[k]||'');
+
+      imageData=n.image||'';
+      $('preview').style.display=imageData?'block':'none';
+
+      if(imageData) $('preview').src=imageData;
+
+      statusBox.textContent='খসড়া লোড হয়েছে।';
+      window.scrollTo({top:0,behavior:'smooth'});
+    };
+
+    const d=document.createElement('button');
+    d.className='btn secondary';
+    d.style.marginLeft='6px';
+    d.textContent='মুছুন';
+
+    d.onclick=()=>{
+      const a=drafts();
+      a.splice(i,1);
+      localStorage.setItem('bv24Drafts',JSON.stringify(a));
+      refreshDrafts();
+    };
+
+    box.append(t,b,d);
+    el.appendChild(box);
+  });
+}
+
+$('saveBtn').onclick=()=>{
+  const n=collect();
+
+  if(!n.title){
+    statusBox.textContent='খসড়া রাখার আগে শিরোনাম লিখুন।';
+    return;
+  }
+
+  try{
+    const a=drafts();
+    a.unshift(n);
+    localStorage.setItem('bv24Drafts',JSON.stringify(a.slice(0,10)));
+    refreshDrafts();
+    statusBox.textContent='এই ব্রাউজারে খসড়া সংরক্ষিত হয়েছে।';
+  }catch{
+    statusBox.textContent='স্টোরেজ পূর্ণ—ছবি বাদ দিয়ে বা ছোট করে চেষ্টা করুন।';
+  }
+};
+
+async function githubPut(owner,repo,branch,path,content,token,message){
+  const url=`https://api.github.com/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/contents/${path.split('/').map(encodeURIComponent).join('/')}`;
+
+  const headers={
+    Authorization:`Bearer ${token}`,
+    Accept:'application/vnd.github+json',
+    'X-GitHub-Api-Version':'2022-11-28'
+  };
+
+  let sha;
+
+  const get=await fetch(url,{headers});
+
+  if(get.ok){
+    const old=await get.json();
+    sha=old.sha;
+  }else if(get.status!==404){
+    const err=await get.json().catch(()=>({}));
+    throw new Error(err.message||`GitHub ফাইল পরীক্ষা ব্যর্থ (${get.status})`);
+  }
+
+  const body={message,content,branch};
+  if(sha) body.sha=sha;
+
+  const res=await fetch(url,{
+    method:'PUT',
+    headers:{
+      ...headers,
+      'Content-Type':'application/json'
+    },
+    body:JSON.stringify(body)
+  });
+
+  const data=await res.json().catch(()=>({}));
+
+  if(!res.ok){
+    throw new Error(data.message||`GitHub-এ লেখা যায়নি (${res.status})`);
+  }
+
+  return data;
+}
+
+form.addEventListener('submit',async e=>{
+  e.preventDefault();
+
+  if(!renderPreview()) return;
+
+  const owner=$('owner').value.trim();
+  const repo=$('repo').value.trim();
+  const branch=$('branch').value.trim();
+  const token=$('token').value.trim();
+
+  if(!owner||!repo||!branch||!token){
+    statusBox.textContent='GitHub ইউজারনেম, Repository, Branch ও Token পূরণ করুন।';
+    return;
+  }
+
+  const n=collect();
+  const fileSlug=`${n.date}-${slug(n.title)}`;
+  const btn=$('publishBtn');
+
+  btn.disabled=true;
+  btn.textContent='প্রকাশ করা হচ্ছে…';
+  statusBox.textContent='GitHub Repository-তে ফাইল আপলোড হচ্ছে; পেজ বন্ধ করবেন না।';
+
+  try{
+    let imagePath='';
+
+    if(n.image){
+      const parts=n.image.split(',');
+      const mime=(parts[0].match(/data:(.*?);base64/)||[])[1]||'image/jpeg';
+      const ext=mime==='image/png'?'png':mime==='image/webp'?'webp':'jpg';
+
+      imagePath=`news-images/${fileSlug}.${ext}`;
+
+      await githubPut(
+        owner,repo,branch,imagePath,parts[1],token,
+        `Upload news image: ${fileSlug}`
+      );
+    }
+
+    const article={
+      ...n,
+      image:imagePath?`/${imagePath}`:'',
+      published:true,
+      publishedAt:new Date().toISOString(),
+      source:'BanglarVoice24 Admin'
+    };
+
+    const json=btoa(unescape(encodeURIComponent(JSON.stringify(article,null,2))));
+
+    const result=await githubPut(
+      owner,repo,branch,
+      `news-data/${fileSlug}.json`,
+      json,token,
+      `Publish news: ${n.title}`
+    );
+
+    statusBox.textContent=
+      `GitHub-এ সংবাদ ফাইল সফলভাবে কমিট হয়েছে। Commit: `+
+      `${result.commit?.sha?.slice(0,7)||'সফল'}। JSON: `+
+      `https://github.com/${owner}/${repo}/blob/${branch}/news-data/${fileSlug}.json । `+
+      `হোমপেজে সংবাদ দেখাতে JSON পড়ার Frontend যুক্ত থাকতে হবে।`;
+
+  }catch(err){
+    statusBox.textContent=
+      'প্রকাশ ব্যর্থ: '+err.message+
+      '। Token-এর Repository access এবং Contents: Read and write অনুমতি পরীক্ষা করুন।';
+  }finally{
+    btn.disabled=false;
+    btn.textContent='📤 GitHub-এ পাবলিশ';
+  }
+});
+
+form.addEventListener('reset',()=>{
+  setTimeout(()=>{
+    imageData='';
+    $('preview').style.display='none';
+    $('articlePreview').style.display='none';
+    statusBox.textContent='';
+    $('date').value=new Date().toLocaleDateString('en-CA');
+  },0);
+});
+
+refreshDrafts();
+</script>
+
+</body>
+</html>
