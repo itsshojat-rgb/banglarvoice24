@@ -1,22 +1,136 @@
 
-<div style="margin:16px 0;padding:12px;border:1px solid #ccc;border-radius:10px">
-  <label for="galleryImage">মোবাইল গ্যালারি থেকে সংবাদ ছবি বেছে নিন</label>
-  <input type="file" id="galleryImage" accept="image/*">
-  <img id="galleryPreview" alt="ছবির প্রিভিউ" style="display:none;max-width:100%;max-height:250px;margin-top:12px">
-</div>
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BanglarVoice24 | Admin Panel</title>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;background:#f3f5f9;color:#202938;
+  font-family:Arial,"Noto Sans Bengali",sans-serif
+}
+.header{
+  background:linear-gradient(135deg,#a90016,#e21d32);
+  color:#fff;text-align:center;padding:25px 15px;
+  box-shadow:0 4px 15px #8e001b30
+}
+.logo{
+  display:inline-block;background:#fff;color:#c20b22;
+  font-weight:900;font-size:25px;padding:10px 16px;
+  border-radius:8px
+}
+.header h1{font-size:23px;margin:14px 0 5px}
+.header p{margin:0;font-size:14px}
+.container{max-width:760px;margin:22px auto;padding:0 13px}
+.card{
+  background:#fff;padding:20px;border-radius:15px;
+  box-shadow:0 5px 22px #18243a0c;margin-bottom:18px
+}
+.card h2{font-size:20px;margin:0 0 18px}
+.section-title{
+  border-left:4px solid #d30c27;padding-left:10px
+}
+label{display:block;font-weight:700;font-size:14px;margin:15px 0 7px}
+input,select,textarea{
+  display:block;width:100%;padding:13px;
+  border:1px solid #d9dee8;border-radius:9px;
+  font-size:16px;background:#fff;color:#222;
+  outline:none
+}
+input:focus,select:focus,textarea:focus{
+  border-color:#c90c25;box-shadow:0 0 0 3px #c90c2512
+}
+textarea{min-height:160px;resize:vertical;line-height:1.7}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.upload{
+  background:#fff8f8;border:2px dashed #df9aa4;
+  padding:16px;border-radius:12px
+}
+.upload input{border:0;padding:8px 0;background:transparent}
+#preview{
+  display:none;width:100%;max-height:280px;
+  object-fit:contain;border-radius:10px;margin-top:12px;
+  background:#f1f1f1
+}
+.btn{
+  width:100%;padding:15px;border:0;border-radius:10px;
+  font-size:17px;font-weight:700;cursor:pointer
+}
+.publish{
+  margin-top:20px;color:#fff;
+  background:linear-gradient(135deg,#b9001b,#e31b35);
+  box-shadow:0 5px 13px #c20b222c
+}
+.reset{margin-top:10px;background:#edf0f5;color:#374151}
+.note{font-size:12px;color:#687386;line-height:1.7}
+#status{margin-top:15px;line-height:1.7;overflow-wrap:anywhere}
+.footer{text-align:center;color:#788194;font-size:12px;padding:20px}
+@media(max-width:480px){
+  .grid{grid-template-columns:1fr}
+  .card{padding:16px}
+  .header h1{font-size:21px}
+}
+</style>
+</head>
+<body>
 
-<script>
-document.getElementById('galleryImage').addEventListener('change',function(){
-  const file=this.files[0];
-  const preview=document.getElementById('galleryPreview');
-  if(!file)return;
-  if(!file.type.startsWith('image/')){
-    alert('দয়া করে একটি ছবি নির্বাচন করুন।');
-    return;
-  }
-  preview.src=URL.createObjectURL(file);
-  preview.style.display='block';
-});
-</script>
-</body>
-</html>
+<header class="header">
+  <div class="logo">BanglarVoice24</div>
+  <h1>সংবাদ প্রকাশ অ্যাডমিন প্যানেল</h1>
+  <p>আপনার সংবাদ লিখুন, ছবি নির্বাচন করুন ও প্রকাশের জন্য প্রস্তুত করুন</p>
+</header>
+
+<main class="container">
+  <section class="card">
+    <h2 class="section-title">📰 নতুন সংবাদ তৈরি করুন</h2>
+
+    <form id="newsForm">
+      <label for="title">সংবাদের শিরোনাম *</label>
+      <input id="title" required maxlength="250"
+        placeholder="এখানে সংবাদের শিরোনাম লিখুন">
+
+      <label for="category">সংবাদ ক্যাটাগরি *</label>
+      <select id="category" required>
+        <option value="">ক্যাটাগরি নির্বাচন করুন</option>
+        <option>জাতীয়</option>
+        <option>রাজনীতি</option>
+        <option>সারাদেশ</option>
+        <option>আন্তর্জাতিক</option>
+        <option>অর্থনীতি</option>
+        <option>শিক্ষা</option>
+        <option>স্বাস্থ্য</option>
+        <option>অপরাধ</option>
+        <option>খেলাধুলা</option>
+        <option>বিনোদন</option>
+        <option>ধর্ম</option>
+        <option>প্রযুক্তি</option>
+        <option>চাকরি</option>
+        <option>অন্যান্য</option>
+      </select>
+
+      <label for="content">সংবাদের বিস্তারিত বিবরণ *</label>
+      <textarea id="content" required
+        placeholder="সম্পূর্ণ সংবাদ এখানে লিখুন..."></textarea>
+
+      <h2 class="section-title" style="margin-top:25px">📍 সংবাদ এলাকার তথ্য</h2>
+
+      <label for="division">বিভাগের নাম *</label>
+      <select id="division" required>
+        <option value="">বিভাগ নির্বাচন করুন</option>
+        <option>ঢাকা</option>
+        <option>চট্টগ্রাম</option>
+        <option>রাজশাহী</option>
+        <option>খুলনা</option>
+        <option>বরিশাল</option>
+        <option>সিলেট</option>
+        <option>রংপুর</option>
+        <option>ময়মনসিংহ</option>
+      </select>
+
+      <div class="grid">
+        <div>
+          <label for="district">জেলার নাম *</label>
+          <input id="district" required placeholder="যেমন: রাজবাড়ী">
+        </div>
