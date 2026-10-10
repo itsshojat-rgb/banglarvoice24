@@ -1,118 +1,22 @@
 
-<!DOCTYPE html>
-<html lang="bn">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>BanglarVoice24 Admin</title>
-<style>
-body{font-family:sans-serif;background:#f1f4f8;margin:0;color:#172033}
-header{background:#12335c;color:white;padding:20px}
-main{max-width:700px;margin:20px auto;padding:12px}
-form,.news{background:white;padding:16px;border-radius:12px;margin-bottom:15px}
-label{display:block;font-weight:bold;margin-top:12px}
-input,select,textarea{box-sizing:border-box;width:100%;padding:12px;margin-top:6px;border:1px solid #ccd5e0;border-radius:8px;font:inherit}
-textarea{min-height:120px}
-button{padding:12px;border:0;border-radius:8px;background:#d92332;color:white;font-weight:bold;margin-top:14px;cursor:pointer}
-.secondary{background:#12335c}
-.note{background:#fff4d6;padding:12px;border-radius:8px;font-size:14px}
-</style>
-</head>
-<body>
-<header>
-<h2>BanglarVoice24</h2>
-<p>নিউজ অ্যাডমিন প্যানেল</p>
-</header>
-<main>
-<p class="note">নিউজ লিখে তালিকায় যোগ করুন। এরপর JSON ডাউনলোড করে GitHub-এ আপডেট করতে হবে। এই প্যানেল নিজে থেকে সরাসরি ওয়েবসাইটে প্রকাশ করে না।</p>
-
-<form id="newsForm">
-<label>সংবাদের শিরোনাম</label>
-<input id="title" required>
-
-<label>ক্যাটাগরি</label>
-<select id="category">
-<option>জাতীয়</option>
-<option>রাজনীতি</option>
-<option>সারাদেশ</option>
-<option>আন্তর্জাতিক</option>
-<option>অর্থনীতি</option>
-<option>শিক্ষা</option>
-<option>স্বাস্থ্য</option>
-<option>খেলাধুলা</option>
-<option>বিনোদন</option>
-<option>প্রযুক্তি</option>
-<option>অন্যান্য</option>
-</select>
-
-<label>সংক্ষিপ্ত বিবরণ</label>
-<textarea id="summary" required></textarea>
-
-<label>সম্পূর্ণ সংবাদ</label>
-<textarea id="content" required></textarea>
-
-<label>ছবির সরাসরি লিংক (ঐচ্ছিক)</label>
-<input id="image" type="url" placeholder="https://...">
-
-<label>প্রতিবেদকের নাম</label>
-<input id="reporter" placeholder="জেলা প্রতিনিধি">
-
-<button type="submit">সংবাদ তালিকায় যোগ করুন</button>
-</form>
-
-<div class="news">
-<h3>সংবাদ তালিকা</h3>
-<div id="list">এখনো কোনো সংবাদ যোগ করা হয়নি।</div>
-<button class="secondary" onclick="downloadNews()">news.json ডাউনলোড করুন</button>
+<div style="margin:16px 0;padding:12px;border:1px solid #ccc;border-radius:10px">
+  <label for="galleryImage">মোবাইল গ্যালারি থেকে সংবাদ ছবি বেছে নিন</label>
+  <input type="file" id="galleryImage" accept="image/*">
+  <img id="galleryPreview" alt="ছবির প্রিভিউ" style="display:none;max-width:100%;max-height:250px;margin-top:12px">
 </div>
-</main>
 
 <script>
-let news=[];
-
-document.getElementById('newsForm').addEventListener('submit',function(e){
-e.preventDefault();
-
-news.unshift({
-title:document.getElementById('title').value.trim(),
-category:document.getElementById('category').value,
-summary:document.getElementById('summary').value.trim(),
-content:document.getElementById('content').value.trim(),
-image:document.getElementById('image').value.trim(),
-reporter:document.getElementById('reporter').value.trim() || 'নিজস্ব প্রতিবেদক',
-date:new Intl.DateTimeFormat('bn-BD',{day:'numeric',month:'long',year:'numeric'}).format(new Date())
+document.getElementById('galleryImage').addEventListener('change',function(){
+  const file=this.files[0];
+  const preview=document.getElementById('galleryPreview');
+  if(!file)return;
+  if(!file.type.startsWith('image/')){
+    alert('দয়া করে একটি ছবি নির্বাচন করুন।');
+    return;
+  }
+  preview.src=URL.createObjectURL(file);
+  preview.style.display='block';
 });
-
-showNews();
-this.reset();
-});
-
-function showNews(){
-document.getElementById('list').innerHTML='';
-news.forEach(function(item){
-let div=document.createElement('div');
-let h=document.createElement('h4');
-h.textContent=item.title;
-let p=document.createElement('p');
-p.textContent=item.category+' — '+item.date;
-div.append(h,p);
-document.getElementById('list').append(div);
-});
-}
-
-function downloadNews(){
-if(news.length===0){
-alert('আগে একটি সংবাদ যোগ করুন।');
-return;
-}
-let file=new Blob([JSON.stringify(news,null,2)],{type:'application/json'});
-let url=URL.createObjectURL(file);
-let a=document.createElement('a');
-a.href=url;
-a.download='news.json';
-a.click();
-URL.revokeObjectURL(url);
-}
 </script>
 </body>
 </html>
